@@ -1,0 +1,41 @@
+<?php
+/**
+ * AMPHP Cron Worker Configuration
+ *
+ * Copy this file to config.php and update the values.
+ */
+
+return [
+    // API endpoint (your WordPress site with the cron service plugin).
+    'api_url' => 'https://ultimatemultisite.com',
+
+    // Worker secret (get this from the WordPress plugin settings).
+    'worker_secret' => 'your-worker-secret-here',
+
+    // Connection timeout in milliseconds.
+    'connect_timeout' => 10000,
+
+    // Transfer timeout in milliseconds.
+    'transfer_timeout' => 30000,
+
+    // How often to poll for new jobs (seconds).
+    'poll_interval' => 5,
+
+    // How often to check for due jobs (seconds).
+    'precision_interval' => 1,
+
+    // How often to send heartbeat (seconds).
+    'heartbeat_interval' => 30,
+
+    // Maximum concurrent job executions.
+    'max_concurrent_jobs' => 50,
+
+    // Log file path.
+    'log_file' => __DIR__ . '/../logs/worker.log',
+
+    // Log level (DEBUG, INFO, WARNING, ERROR).
+    'log_level' => 'INFO',
+
+    // Worker ID (optional, auto-generated if not set).
+    'worker_id' => null,
+];

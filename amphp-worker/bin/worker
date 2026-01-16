@@ -1,0 +1,83 @@
+#!/usr/bin/env php
+<?php
+/**
+ * AMPHP Cron Worker Entry Point
+ *
+ * This is the main entry point for the cron worker service.
+ * Run with: php bin/worker
+ */
+
+declare(strict_types=1);
+
+// Ensure we're running from CLI.
+if (PHP_SAPI !== 'cli') {
+    echo "This script must be run from the command line.\n";
+    exit(1);
+}
+
+// Find autoloader.
+$autoloadPaths = [
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../vendor/autoload.php',
+    __DIR__ . '/../../../vendor/autoload.php',
+];
+
+$autoloaderFound = false;
+foreach ($autoloadPaths as $autoloadPath) {
+    if (file_exists($autoloadPath)) {
+        require $autoloadPath;
+        $autoloaderFound = true;
+        break;
+    }
+}
+
+if (!$autoloaderFound) {
+    echo "Could not find Composer autoloader. Run 'composer install' first.\n";
+    exit(1);
+}
+
+// Load configuration.
+$configPath = __DIR__ . '/../config/config.php';
+
+if (!file_exists($configPath)) {
+    echo "Configuration file not found. Copy config/config.php.example to config/config.php\n";
+    exit(1);
+}
+
+$config = require $configPath;
+
+use CronService\Worker\Config;
+use CronService\Worker\Worker;
+
+// Initialize configuration.
+$configObj = new Config($config);
+
+// Create and run worker.
+$worker = new Worker($configObj);
+
+echo "Starting Ultimate Multisite Cron Worker...\n";
+echo "API URL: " . $configObj->get('api_url') . "\n";
+echo "Worker ID: " . $worker->getWorkerId() . "\n";
+echo "Press Ctrl+C to stop.\n\n";
+
+// Handle shutdown signals.
+if (function_exists('pcntl_signal')) {
+    pcntl_signal(SIGTERM, function () use ($worker) {
+        echo "\nReceived SIGTERM, shutting down gracefully...\n";
+        $worker->stop();
+    });
+
+    pcntl_signal(SIGINT, function () use ($worker) {
+        echo "\nReceived SIGINT, shutting down gracefully...\n";
+        $worker->stop();
+    });
+}
+
+// Run the worker.
+try {
+    $worker->run();
+} catch (Throwable $e) {
+    echo "Fatal error: " . $e->getMessage() . "\n";
+    echo $e->getTraceAsString() . "\n";
+    exit(1);
+}

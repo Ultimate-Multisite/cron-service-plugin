@@ -1,0 +1,35 @@
+[Unit]
+Description=Ultimate Multisite Cron Worker
+Documentation=https://ultimatemultisite.com/docs/external-cron
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+
+# Working directory - update this path
+WorkingDirectory=/var/www/cron-service/amphp-worker
+
+# Start command
+ExecStart=/usr/bin/php bin/worker
+
+# Restart on failure
+Restart=always
+RestartSec=5
+
+# Logging
+StandardOutput=append:/var/log/cron-worker/output.log
+StandardError=append:/var/log/cron-worker/error.log
+
+# Environment
+Environment=PHP_CLI_SERVER_WORKERS=4
+
+# Security settings
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/cron-service/amphp-worker/logs
+
+[Install]
+WantedBy=multi-user.target

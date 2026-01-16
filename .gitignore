@@ -1,0 +1,26 @@
+# Composer
+/vendor/
+/amphp-worker/vendor/
+
+# Config files with secrets
+/amphp-worker/config/config.php
+
+# Logs
+/amphp-worker/logs/*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Build artifacts
+*.zip
+*.tar.gz
