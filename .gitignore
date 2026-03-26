@@ -24,3 +24,4 @@ node_modules/
 # Build artifacts
 *.zip
 *.tar.gz
+.agents/loop-state/
