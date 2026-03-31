@@ -12,9 +12,9 @@
         "phpcompatibility/phpcompatibility-wp": "^2.1"
     },
     "autoload": {
-        "psr-4": {
-            "UM_Cron_Service\\": "inc/"
-        }
+        "classmap": [
+            "inc"
+        ]
     },
     "config": {
         "allow-plugins": {
