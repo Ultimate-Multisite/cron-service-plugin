@@ -27,5 +27,10 @@
     "scripts": {
         "phpcs": "phpcs --standard=WordPress .",
         "phpcbf": "phpcbf --standard=WordPress ."
+    },
+    "autoload-dev": {
+        "files": [
+            "vendor/php-stubs/wordpress-stubs/wordpress-stubs.php"
+        ]
     }
 }
