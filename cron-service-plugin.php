@@ -8,7 +8,7 @@
  * Author: David Stone - Multisite Ultimate
  * Author URI: https://ultimatemultisite.com
  * Requires at least: 6.0
- * Tested up to: 6.6
+ * Tested up to: 7.1
  * Requires PHP: 7.4
  *
  * @package UM_Cron_Service
