@@ -4,7 +4,7 @@
  * Description: External cron service management for Ultimate Multisite customers. Handles site registration, job scheduling, and execution tracking.
  * Plugin URI: https://ultimatemultisite.com
  * Text Domain: um-cron-service
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: David Stone - Multisite Ultimate
  * Author URI: https://ultimatemultisite.com
  * Requires at least: 6.0
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants.
-define('UM_CRON_SERVICE_VERSION', '1.0.0');
+define('UM_CRON_SERVICE_VERSION', '1.0.1');
 define('UM_CRON_SERVICE_PLUGIN_FILE', __FILE__);
 define('UM_CRON_SERVICE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('UM_CRON_SERVICE_PLUGIN_URL', plugin_dir_url(__FILE__));
